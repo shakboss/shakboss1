@@ -1,0 +1,33 @@
+{
+    "inbounds": [
+        {
+            "port": 1080,
+            "protocol": "socks",
+            "settings": {
+                "auth": "noauth",
+                "udp": true,
+                "ip": "127.0.0.1"
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "tt.shaktt.site",
+                        "port": 80,
+                        "users": [
+                            {
+                                "id": "4f2c335a-4ec8-4318-9ed3-d7ec9a3b2c20",
+                                "alterId": 64,
+                                "security": "none"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
