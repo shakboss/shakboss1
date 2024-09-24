@@ -3,17 +3,17 @@ import json
 import os
 import time
 
-def run_v2ray(shakboss1):
+def run_v2ray(config_path):/data/data/com.termux/files/home/shakboss1/
     # Ensure the V2Ray executable is in your PATH or provide the full path
     v2ray_executable = "v2ray"  # Change this if necessary
 
     # Check if the config file exists
-    if not os.path.isfile(shakboss1):
+    if not os.path.isfile(config_path):/data/data/com.termux/files/home/shakboss1/
         print("Configuration file not found.")
         return
 
     # Start the V2Ray process
-    process = subprocess.Popen([v2ray_executable, "-config", shakboss1])
+    process = subprocess.Popen([v2ray_executable, "-config", /data/data/com.termux/files/home/shakboss1/])
     
     try:
         # Keep the script running
@@ -27,5 +27,5 @@ def run_v2ray(shakboss1):
         print("V2Ray client stopped.")
 
 if __name__ == "__main__":
-    shakboss1 = "config.json"  # Path to your V2Ray config file
-    run_v2ray(shakboss1)
+    CONFIG_PATH = "config.json"  # Path to your V2Ray config file
+    run_v2ray(/data/data/com.termux/files/home/shakboss1/)
