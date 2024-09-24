@@ -3,12 +3,12 @@ import json
 import os
 import time
 
-def run_v2ray(config_path):
+def run_v2ray(config_path):shakboss1
     # Ensure the V2Ray executable is in your PATH or provide the full path
     v2ray_executable = "v2ray"  # Change this if necessary
 
     # Check if the config file exists
-    if not os.path.isfile(config_path):
+    if not os.path.isfile(config_path):shakboss1
         print("Configuration file not found.")
         return
 
