@@ -1,31 +1,44 @@
-import subprocess
+import socket
 import json
-import os
-import time
+import base64
+import hashlib
 
-def run_v2ray(config_path):/data/data/com.termux/files/home/shakboss1/
-    # Ensure the V2Ray executable is in your PATH or provide the full path
-    v2ray_executable = "v2ray"  # Change this if necessary
+class VmessClient:
+    def __init__(self, server, port, uuid):
+        self.server = server
+        self.port = port
+        self.uuid = uuid
 
-    # Check if the config file exists
-    if not os.path.isfile(config_path):/data/data/com.termux/files/home/shakboss1/
-        print("Configuration file not found.")
-        return
+    def create_request(self):
+        # Create a Vmess request
+        request = {
+            "v": "2",
+            "ps": "Python Vmess Client",
+            "add": self.server,
+            "port": str(self.port),
+            "id": self.uuid,
+            "aid": "0",
+            "net": "ws",
+            "type": "none",
+            "host": "us-23.hihu.net",
+            "path": "/8znusky7",
+            "tls": ""
+        }
+        return json.dumps(request)
 
-    # Start the V2Ray process
-    process = subprocess.Popen([v2ray_executable, "-config", /data/data/com.termux/files/home/shakboss1/])
-    
-    try:
-        # Keep the script running
-        print("V2Ray client is running. Press Ctrl+C to exit.")
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        print("Stopping V2Ray client...")
-        process.terminate()
-        process.wait()
-        print("V2Ray client stopped.")
+    def connect(self):
+        # Connect to the Vmess server
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.connect((self.server, self.port))
+            request = self.create_request()
+            s.sendall(base64.b64encode(request.encode()))
+            response = s.recv(1024)
+            print("Response from server:", base64.b64decode(response).decode())
 
 if __name__ == "__main__":
-    CONFIG_PATH = "config.json"  # Path to your V2Ray config file
-    run_v2ray(/data/data/com.termux/files/home/shakboss1/)
+    # Example usage
+    server = "pushplanet.com"
+    port = 80
+    uuid = str(hashlib.md5(b"92064570-7b70-11ef-b332-205c6d5f5d78").hexdigest())  # Replace with your actual UUID
+    client = VmessClient(server, port, uuid)
+    client.connect()
